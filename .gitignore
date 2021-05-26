@@ -1,0 +1,17 @@
+# CMake
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+
+# Ninja
+build.ninja
+rules.ninja
+.ninja_deps
+.ninja_log
+
+# Input/output
+*.mp4
+*.png
+
+# Binary
+amogus
