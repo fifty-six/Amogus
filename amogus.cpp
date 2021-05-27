@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     (
         argv[2],
         codec,
-        30,
+        45,
         tiled.size(),
         true
     );
@@ -84,8 +84,8 @@ int main(int argc, char** argv)
 
                 auto pix = img.at<cv::Vec3b>(j, k);
 
-                frame.setTo(pix, dark_mask);
-                frame.setTo(pix * 0.5, light_mask);
+                frame.setTo(pix * 0.5, dark_mask);
+                frame.setTo(pix, light_mask);
 
                 auto roi = tiled(cv::Rect(k * frame.cols, j * frame.rows, frame.cols, frame.rows));
 
