@@ -1,5 +1,4 @@
 #include <iostream>
-#include <span>
 
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
@@ -9,22 +8,20 @@ using cv::Size;
 
 int main(int argc, char** argv)
 {
-    auto args = std::span(argv, argc);
-
-    if (args.size() != 4)
+    if (argc != 4)
     {
-        printf("Usage: %s INPUT OUTPUT RES\n", args[0]);
+        printf("Usage: %s INPUT OUTPUT RES\n", argv[0]);
         return -1;
     }
 
-    auto img = cv::imread(args[1]);
+    auto img = cv::imread(argv[1]);
 
     if (!img.data) {
-        std::cerr << "No data! Does the image [" << args[1] << "] exist?" << std::endl;
+        std::cerr << "No data! Does the image [" << argv[1] << "] exist?" << std::endl;
         return -1;
     }
 
-    auto res = std::atoi(args[3]);
+    auto res = std::atoi(argv[3]);
 
     // Scale it down so we don't have too many amogi
     cv::resize(img, img, cv::Size(res, static_cast<int>((img.rows / (1.0 * img.cols)) * res)));
@@ -48,7 +45,7 @@ int main(int argc, char** argv)
 
     cv::VideoWriter vwriter
     (
-        args[2],
+        argv[2],
         codec,
         30,
         tiled.size(),
@@ -56,7 +53,7 @@ int main(int argc, char** argv)
     );
 
     if (!vwriter.isOpened()) {
-        std::cout << "Unable to open video writer to file " << args[2] << "! Exiting." << std::endl;
+        std::cout << "Unable to open video writer to file " << argv[2] << "! Exiting." << std::endl;
         return -1;
     }
 
